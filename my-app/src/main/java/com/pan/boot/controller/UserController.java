@@ -1,5 +1,6 @@
 package com.pan.boot.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.pan.boot.common.result.BaseResponse;
 import com.pan.boot.common.result.ResultVo;
 import com.pan.boot.model.dto.UserLoginDTO;
@@ -38,5 +39,11 @@ public class UserController {
     @ApiOperation("用户登录")
     public BaseResponse<User> login(@Validated @RequestBody UserLoginDTO userLoginDTO) {
         return ResultVo.success(new User());
+    }
+
+    @GetMapping("/page")
+    public BaseResponse<PageInfo<User>> getUserPage(@RequestParam("pagenum") Integer pagenum, @RequestParam("pagesize") Integer pagesize) {
+        PageInfo<User> userPage = userService.userPage(pagenum, pagesize);
+        return ResultVo.success(userPage);
     }
 }

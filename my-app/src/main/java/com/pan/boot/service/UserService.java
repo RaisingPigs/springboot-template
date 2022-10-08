@@ -1,5 +1,6 @@
 package com.pan.boot.service;
 
+import com.github.pagehelper.PageInfo;
 import com.pan.boot.model.entity.User;
 
 import java.util.List;
@@ -11,4 +12,6 @@ import java.util.List;
  **/
 public interface UserService {
     List<User> getUserList();
+
+    PageInfo<User> userPage(Integer pagenum, Integer pagesize);
 }

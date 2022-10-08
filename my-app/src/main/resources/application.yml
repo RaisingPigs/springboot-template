@@ -25,3 +25,10 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: false
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+pagehelper:
+  #开启后 如果 pageSize=0 或者 RowBounds.limit = 0 就会查询出全部的结果
+  page-size-zero: true
+  #分页合理性配置
+  #如果 pageNum <= 0 会查询第一页，如果 pageNum > pages 会查询最后一页。
+  reasonable: true
