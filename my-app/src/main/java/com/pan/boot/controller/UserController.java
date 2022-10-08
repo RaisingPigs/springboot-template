@@ -3,12 +3,12 @@ package com.pan.boot.controller;
 import com.github.pagehelper.PageInfo;
 import com.pan.boot.common.result.BaseResponse;
 import com.pan.boot.common.result.ResultVo;
-import com.pan.boot.model.dto.UserLoginDTO;
+import com.pan.boot.model.request.PageRequest;
+import com.pan.boot.model.request.UserLoginRequest;
 import com.pan.boot.model.entity.User;
 import com.pan.boot.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import lombok.Value;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,13 +37,14 @@ public class UserController {
 
     @PostMapping("/login")
     @ApiOperation("用户登录")
-    public BaseResponse<User> login(@Validated @RequestBody UserLoginDTO userLoginDTO) {
+    public BaseResponse<User> login(@Validated @RequestBody UserLoginRequest userLoginRequest) {
         return ResultVo.success(new User());
     }
 
+    @ApiOperation("获取用户分页")
     @GetMapping("/page")
-    public BaseResponse<PageInfo<User>> getUserPage(@RequestParam("pagenum") Integer pagenum, @RequestParam("pagesize") Integer pagesize) {
-        PageInfo<User> userPage = userService.userPage(pagenum, pagesize);
+    public BaseResponse<PageInfo<User>> getUserPage(@Validated PageRequest pageRequest) {
+        PageInfo<User> userPage = userService.userPage(pageRequest.getPagenum(), pageRequest.getPagesize());
         return ResultVo.success(userPage);
     }
 }
